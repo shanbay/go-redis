@@ -91,7 +91,7 @@ func newTracingHook(connString string, opts ...TracingOption) *tracingHook {
 
 func (th *tracingHook) DialHook(hook redis.DialHook) redis.DialHook {
 	return func(ctx context.Context, network, addr string) (net.Conn, error) {
-		if !trace.SpanFromContext(ctx).IsRecording() {
+		if !trace.SpanContextFromContext(ctx).IsValid() {
 			return hook(ctx, network, addr)
 		}
 
@@ -109,7 +109,7 @@ func (th *tracingHook) DialHook(hook redis.DialHook) redis.DialHook {
 
 func (th *tracingHook) ProcessHook(hook redis.ProcessHook) redis.ProcessHook {
 	return func(ctx context.Context, cmd redis.Cmder) error {
-		if !trace.SpanFromContext(ctx).IsRecording() {
+		if !trace.SpanContextFromContext(ctx).IsValid() {
 			return hook(ctx, cmd)
 		}
 
@@ -145,7 +145,7 @@ func (th *tracingHook) ProcessPipelineHook(
 	hook redis.ProcessPipelineHook,
 ) redis.ProcessPipelineHook {
 	return func(ctx context.Context, cmds []redis.Cmder) error {
-		if !trace.SpanFromContext(ctx).IsRecording() {
+		if !trace.SpanContextFromContext(ctx).IsValid() {
 			return hook(ctx, cmds)
 		}
 
