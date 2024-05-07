@@ -1,4 +1,4 @@
-module github.com/redis/go-redis/extra/redisotel/v9
+module github.com/redis/go-redis/extra/redisotel
 
 go 1.19
 
