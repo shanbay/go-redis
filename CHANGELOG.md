@@ -1,3 +1,9 @@
+## Unreleased
+
+### Changed
+
+`go-redis` will skip span if the span context is invalid or the traceFlag is not sampled.
+
 ## [9.0.5](https://github.com/redis/go-redis/compare/v9.0.4...v9.0.5) (2023-05-29)
 
 
